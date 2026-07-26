@@ -1,0 +1,17 @@
+# 构建 / 依赖产物
+node_modules/
+*.log
+
+# OS 文件
+.DS_Store
+Thumbs.db
+
+# 临时验证脚本（agent 工具链产生，勿入库）
+_check*.mjs
+_*.txt
+_*.json
+_*.out.json
+_tree_out.*
+
+# Agent 工作区记忆（含本地绝对路径，不宜公开）
+.workbuddy/
