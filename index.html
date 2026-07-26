@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>波比 BOBBY — 开发骨架 (Stage 1)</title>
+  <style>
+    html, body { margin: 0; background: #0a0a12; color: #cfe3ff; font-family: monospace; }
+    #game { display: flex; justify-content: center; margin-top: 16px; }
+    #hint { text-align: center; opacity: .7; font-size: 13px; margin-top: 8px; }
+  </style>
+  <!-- Phaser 3 通过 CDN 作为全局变量加载，后续模块直接使用全局 Phaser -->
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+</head>
+<body>
+  <div id="game"></div>
+  <div id="hint">方向键 / WASD 移动，上 / W 跳跃。FPS 与坐标见左上角。</div>
+  <script type="module" src="src/main.js" id="main-module"></script>
+  <script>
+    // file:// 直接打开会因浏览器安全策略拦截 ES 模块与 data/balance.json 的加载，
+    // 导致游戏初始化不完整、按键（如长按 L 听声）时循环抛错卡死。提前拦截并给清晰提示。
+    if (location.protocol === 'file:') {
+      var _mod = document.getElementById('main-module');
+      if (_mod) _mod.remove();
+      document.body.innerHTML =
+        '<div style="max-width:660px;margin:48px auto;padding:24px;background:#14141f;border:1px solid #2a2a3f;border-radius:12px;color:#cfe3ff;font-family:monospace;line-height:1.65">'
+        + '<h2 style="margin-top:0;color:#9fe0ff">波比 BOBBY 需要通过本地服务器打开</h2>'
+        + '<p>直接双击 <code>index.html</code>（<code>file://</code>）时，浏览器会出于安全策略拦截 ES 模块与 '
+        + '<code>data/balance.json</code> 的加载，导致游戏初始化不完整，按键（例如长按 L 听声）时主循环逐帧抛错而卡死。</p>'
+        + '<p>正确打开方式（在 Bobby 项目目录下执行）：</p>'
+        + '<pre style="background:#0a0a12;padding:12px;border-radius:8px;overflow:auto">cd 项目目录\npython -m http.server 8088 --bind 127.0.0.1</pre>'
+        + '<p>然后浏览器访问 <code style="color:#9fe0ff">http://127.0.0.1:8088/</code></p>'
+        + '</div>';
+    }
+  </script>
+</body>
+</html>
