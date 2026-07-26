@@ -1,0 +1,58 @@
+﻿分组|变量|JSON路径|Base|Min|Max|公式（联动，非硬编码）|备注
+玩家|玩家最大鱼心|player.maxHP|5|3|9|base(5) + maskLevel|面具升级+1/级；[PLACEHOLDER]以5为基线
+玩家|爪击基础伤害|player.clawDamage|1|1|4|1 + Σ(clawCollar.bonus)|+1/利爪项圈；对标HK单面具
+玩家|每击产灵毛|player.motePerHit|1|1|2|base(1) × collar.moteMult|佩戴项圈产率修正
+玩家|每杀产灵毛|player.motePerKill|3|1|6|base(3) × collar.moteMult|[PLACEHOLDER]
+玩家|灵毛池上限|player.motePoolMax|33|20|66|33 + Σ(pool1.rank × 12)|对标HK灵魂33；元升级pool1可叠2级
+玩家|治愈1鱼心耗小鱼干|player.healCostFishPerHeart|1|1|3|base(1)|窝内回血价
+玩家|项圈槽位|player.collarNotches|3|1|6|3 + notch1(1) + notch2(1)|祭坛可+；[PLACEHOLDER]
+玩家|复活无敌时长|player.respawnInvulnMs|1200|600|2000|base(1200)|ms
+战斗|爪击前摇|combat.clawWindupMs|40|20|80|base(40)|手感
+战斗|爪击持续|combat.clawActiveMs|120|60|200|base(120)|
+战斗|爪击后摇|combat.clawRecoveryMs|110|50|200|base(110)|后摇过长→被反打
+战斗|爪击距离|combat.clawRange|36|20|60|base(36)|
+战斗|扑袭速度|combat.pounceSpeed|430|300|600|base(430)|
+战斗|扑袭i-frame|combat.pounceIFrameMs|300|150|500|base(300)|0.3s是否过强
+战斗|下扑突进速度|combat.diveLungeVel|280|180|400|base(280)|
+战斗|下扑弹跳倍率|combat.diveBounceMult|1.2|1.0|1.6|base(1.2)|影响pogo手感
+猫之技艺|月爪斩消耗|（派生）|12|5|25|ceil(motePoolMax × 0.36)|法术消耗随池上限联动
+猫之技艺|绒盾消耗|（派生）|18|5|25|ceil(motePoolMax × 0.55)|
+猫之技艺|九命闪消耗|（派生）|8|5|25|ceil(motePoolMax × 0.24)|
+敌人|小怪HP|enemy.hp|5|2|10|base(5)|
+敌人|小怪接触伤害|enemy.contactDamage|1|1|3|base(1)|
+敌人|小怪掉小鱼干|enemy.fishDrop|2|0|5|base(2) × collar.fishMult|[PLACEHOLDER]
+敌人|仇恨范围|enemy.aggroRange|300|150|500|base(300)|px
+敌人|追击速度|enemy.chaseSpeed|70|40|120|base(70)|
+移动|移动速度|movement.moveSpeed|220|150|320|base(220)|
+移动|跳跃初速|movement.jumpVelocity|540|420|680|base(540)|跳高≈162px
+扑袭|扑袭i-frame(秒)|pounce.iFrame|0.3|0.15|0.5|base(0.3)|与combat.pounceIFrameMs同源
+扑袭|弹跳高度倍率|pounce.bounceHeight|1.2|1.0|1.6|base(1.2)|
+听声|显形阈值|listen.revealThreshold|0.6|0.3|1.0|base(0.6) × collar.listenThresholdMult|太短变透视
+听声|半径|listen.radius|6|3|12|base(6) × collar.listenRadiusMult|m（pxPerMeter=32）
+听声|降速系数|listen.slowFactor|0.85|0.6|1.0|base(0.85)|
+听声|受击硬直|listen.hitstunMs|400|200|600|base(400)|双锁①防透视
+寂瘴|每秒掉血|blight.dps|0.5|0.2|1.0|base(0.5) × (1 - blightResist)|[PLACEHOLDER]可能偏紧
+寂瘴|听声压制|blight.listenSuppress|0.35|0.1|0.6|base(0.35)|浓瘴压制听声
+寂瘴|敌加伤|blight.enemyDmgBonus|0.5|0.2|1.0|base(0.5)|
+寂瘴|敌提速|blight.enemySpeedBonus|0.4|0.1|0.8|base(0.4)|
+寂瘴|清瘴净化时长|blight.purifyDurationMs|12000|6000|30000|base(12000)|ms
+灵影|强度(占生前%)|shade.strengthPct|70|40|100|base(70)|防劝退；[PLACEHOLDER]
+灵影|自身体血|shade.selfHP|4|2|8|base(4)|
+灵影|赎罪价系数|shade.atonementFactor|0.5|0.2|1.0|ceil(carriedMotes × 0.5) 小鱼干|猫窝远程赎罪兜底；破死锁关键
+Boss|小Boss HP|boss.miniHP / rustooth.hp|120|60|200|base(120)|锈齿鼠王
+Boss|最终Boss HP|boss.finalHP|800|400|1500|阶段数 × 阶段系数（终局拆分待v0.2）|按阶段拆分
+Boss|阶段切换阈值|boss.rustooth.phase2Threshold|0.5|0.3|0.7|base(0.5)|血量比例
+经济|起始小鱼干|currency.startingFish|10|0|30|base(10)|
+经济|起始绒毛|currency.startingFluff|0|0|5|base(0)|
+经济|面具升级价|shop.items.mask.price|16|8|32|base(16)|最大鱼心+1
+经济|地图价|shop.items.map.price|8|4|16|base(8)|
+经济|静默/贪吃项圈价|shop.items.collar_silent/glutton.price|12|6|24|base(12)|
+经济|九命项圈价|shop.items.collar_ninelife.price|24|12|48|base(24)|占2槽
+经济|苔语项圈价|shop.items.collar_moss.price|16|8|32|base(16)|
+元进度|项圈槽+1(1级)|metaTree.notch1.cost|2|1|8|base(2)|
+元进度|项圈槽+1(2级)|metaTree.notch2.cost|4|1|8|4 × rank递进；requires notch1
+元进度|灵毛池+12|metaTree.pool1.cost|2|1|6|2 × rank；可叠2级
+元进度|二段扑|metaTree.move_doublepounce.cost|3|1|8|base(3)|
+元进度|绒羽滑翔|metaTree.move_glide.cost|5|2|10|base(5)；requires 二段扑
+元进度|里程碑绒毛|meta.milestoneFluff|1|1|3|base(1)|首局钩子/区域100%
+元进度|重复Boss小鱼干加成|meta.repeatBossFishBonus|25|10|50|base(25)|二次击杀改掉小鱼干
