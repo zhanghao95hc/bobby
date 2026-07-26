@@ -1,0 +1,214 @@
+{
+  "player": {
+    "maxHP": 5,
+    "clawDamage": 1,
+    "motePerHit": 1,
+    "motePerKill": 3,
+    "motePoolMax": 33,
+    "healCostFishPerHeart": 1,
+    "collarNotches": 3,
+    "respawnInvulnMs": 1200
+  },
+  "enemy": {
+    "fishDrop": 2,
+    "aggroRange": 300,
+    "chaseSpeed": 70,
+    "hp": 5,
+    "contactDamage": 1,
+    "hitstunMs": 200
+  },
+  "movement": {
+    "moveSpeed": 220,
+    "jumpVelocity": 540
+  },
+  "pounce": {
+    "iFrame": 0.3,
+    "bounceHeight": 1.2
+  },
+  "listen": {
+    "revealThreshold": 0.6,
+    "radius": 6,
+    "slowFactor": 0.85,
+    "pxPerMeter": 32,
+    "hitstunMs": 400,
+    "rippleIntervalMs": 220,
+    "ghostAlpha": 0.5
+  },
+  "blight": {
+    "dps": 0.5,
+    "listenSuppress": 0.35,
+    "enemyDmgBonus": 0.5,
+    "enemySpeedBonus": 0.4,
+    "purifyRadius": 70,
+    "purifyDurationMs": 12000
+  },
+  "boss": {
+    "miniHP": 120,
+    "finalHP": 800,
+    "rustooth": {
+      "name": "锈齿鼠王",
+      "hp": 120,
+      "phase2Threshold": 0.5,
+      "contactDamage": 1,
+      "moveCooldownMs": { "p1": 1500, "p2": 1100 },
+      "moves": {
+        "p1": ["dashBite"],
+        "p2": ["dashBite", "summon"]
+      },
+      "dashBite": {
+        "telegraphMs": 520,
+        "activeMs": 430,
+        "recoverMs": 520,
+        "speed": 360,
+        "damage": 1
+      },
+      "summon": {
+        "telegraphMs": 600,
+        "recoverMs": 760,
+        "count": 2,
+        "hp": 5,
+        "contactDamage": 1
+      },
+      "fishReward": 25,
+      "fluffReward": 1,
+      "phaseShiftInvulnMs": 1200
+    },
+    "lord": {
+      "_comment": "终局Boss 沉眠之主(GDD 第7节)。3 阶段(阈值66%/34%)，每阶段新机制；难度随元进度自适应(metaScale)。招式定义按 p1/p2 归并，p3 复用并开启 enrage。所有数值 [PLACEHOLDER] 待 playtest。",
+      "name": "沉眠之主",
+      "hp": 800,
+      "phaseThresholds": [0.66, 0.34],
+      "contactDamage": 1,
+      "phaseShiftInvulnMs": 1400,
+      "fishReward": 50,
+      "fluffReward": 3,
+      "metaScale": {
+        "hpPerTier": 70,
+        "cdMultPerTier": -0.04,
+        "cdMultMin": 0.65
+      },
+      "phases": {
+        "p1": {
+          "title": "苏醒",
+          "moves": ["swipe", "dreamOrb"],
+          "moveCooldownMs": 1500,
+          "swipe": { "telegraphMs": 560, "activeMs": 340, "recoverMs": 560, "speed": 230, "damage": 1, "range": 170 },
+          "dreamOrb": { "telegraphMs": 640, "recoverMs": 720, "count": 3, "speed": 170, "damage": 1, "spreadDeg": 26 }
+        },
+        "p2": {
+          "title": "寂瘴同化",
+          "moves": ["swipe", "blightRing", "summon"],
+          "moveCooldownMs": 1300,
+          "blightRing": { "telegraphMs": 720, "recoverMs": 820, "expandSpeed": 150, "bandWidth": 46, "damage": 1, "gapDeg": 70, "lifeMs": 2600 },
+          "summon": { "telegraphMs": 640, "recoverMs": 760, "count": 2, "hp": 6, "contactDamage": 1 },
+          "blightZones": [ { "x": 250, "y": 300, "w": 190, "h": 210 } ],
+          "listenRevealGap": true
+        },
+        "p3": {
+          "title": "终焉",
+          "moves": ["swipe", "dreamOrb", "blightRing", "summon"],
+          "moveCooldownMs": 1050,
+          "enrage": { "speedMult": 1.25, "damageBonus": 1 }
+        }
+      }
+    }
+  },
+  "shade": {
+    "strengthPct": 0.7,
+    "selfHP": 4,
+    "atonementFactor": 0.5
+  },
+  "combat": {
+    "clawWindupMs": 40,
+    "clawActiveMs": 120,
+    "clawRecoveryMs": 110,
+    "clawRange": 36,
+    "clawHeight": 24,
+    "pounceSpeed": 430,
+    "pounceDurationMs": 180,
+    "pounceIFrameMs": 300,
+    "diveLungeVel": 280,
+    "diveBounceMult": 1.2
+  },
+  "tutorial": {
+    "fishPileAmount": 5
+  },
+  "collar": {
+    "notches": 3,
+    "startingOwned": ["claw"],
+    "catalog": {
+      "claw": {
+        "name": "利爪项圈",
+        "slots": 1,
+        "desc": "爪伤+1，最大鱼心-1",
+        "clawDamage": 1,
+        "maxHP": -1
+      },
+      "silent": {
+        "name": "静默项圈",
+        "slots": 1,
+        "desc": "听声更快更广，产毛-15%",
+        "listenThresholdMult": 0.6,
+        "listenRadiusMult": 1.4,
+        "moteMult": 0.85
+      },
+      "glutton": {
+        "name": "贪吃项圈",
+        "slots": 1,
+        "desc": "小鱼干+25%，灵毛-10%",
+        "fishMult": 1.25,
+        "moteMult": 0.9
+      },
+      "ninelife": {
+        "name": "九命项圈",
+        "slots": 2,
+        "desc": "休窝后首次死亡原地复活",
+        "nineLife": true
+      },
+      "moss": {
+        "name": "苔语项圈",
+        "slots": 1,
+        "desc": "寂瘴减伤60%，灵毛-5%",
+        "blightResist": 0.6,
+        "moteMult": 0.95
+      }
+    }
+  },
+  "shop": {
+    "items": {
+      "collar_silent": { "type": "collar", "id": "silent", "price": 12, "name": "静默项圈" },
+      "collar_glutton": { "type": "collar", "id": "glutton", "price": 12, "name": "贪吃项圈" },
+      "collar_ninelife": { "type": "collar", "id": "ninelife", "price": 24, "name": "九命项圈" },
+      "collar_moss": { "type": "collar", "id": "moss", "price": 16, "name": "苔语项圈（瘴减伤）" },
+      "map": { "type": "map", "price": 8, "name": "区域地图（点亮全部）" },
+      "mask": { "type": "mask", "price": 16, "name": "面具升级（最大鱼心+1）" }
+    }
+  },
+  "currency": {
+    "startingFish": 10,
+    "startingFluff": 0
+  },
+  "metaTree": {
+    "_comment": "元进度树(GDD 4.8)：花记忆绒毛在猫神祭坛解锁永久能力。effect: collarNotch(+槽位)/motePoolMax(+灵毛上限)/moveSkill(新移动技)。requires 为前置节点 id。cost 为每级花费(随等级×rank)。",
+    "notch1": { "name": "项圈槽 +1", "desc": "可多戴一件项圈", "cost": 2, "effect": "collarNotch", "bonus": 1, "maxRank": 1, "requires": [] },
+    "notch2": { "name": "项圈槽 +1（进阶）", "desc": "再 +1 槽位", "cost": 4, "effect": "collarNotch", "bonus": 1, "maxRank": 1, "requires": ["notch1"] },
+    "pool1": { "name": "灵毛池 +12", "desc": "灵毛上限提升（可叠 2 级）", "cost": 2, "effect": "motePoolMax", "bonus": 12, "maxRank": 2, "requires": [] },
+    "move_doublepounce": { "name": "二段扑", "desc": "空中可再扑一次（新移动技）", "cost": 3, "effect": "moveSkill", "skill": "doublepounce", "maxRank": 1, "requires": [] },
+    "move_glide": { "name": "绒羽滑翔", "desc": "空中长按跳/上 缓降（新移动技）", "cost": 5, "effect": "moveSkill", "skill": "glide", "maxRank": 1, "requires": ["move_doublepounce"] }
+  },
+  "meta": {
+    "milestoneFluff": 1,
+    "repeatBossFishBonus": 25
+  },
+  "regionsMap": {
+    "_comment": "解锁式区域图(GDD 第6节/阶段10)：节点 id 对应 profile.regions 的 key，regions[id]>=100 即点亮。links 为连线。坐标 x/y 为浮层内布局像素。",
+    "current": "绒毛巢",
+    "nodes": [
+      { "id": "绒毛巢", "name": "绒毛巢", "x": 110, "y": 210, "links": ["沉眠回廊"] },
+      { "id": "沉眠回廊", "name": "沉眠回廊", "x": 320, "y": 130, "links": ["寂瘴沼"] },
+      { "id": "寂瘴沼", "name": "寂瘴沼", "x": 320, "y": 300, "links": ["猫神殿"] },
+      { "id": "猫神殿", "name": "猫神殿", "x": 540, "y": 215, "links": ["寂灭之眼"] },
+      { "id": "寂灭之眼", "name": "寂灭之眼", "x": 720, "y": 215, "links": [] }
+    ]
+  }
+}
